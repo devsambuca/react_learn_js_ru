@@ -4,8 +4,10 @@ function Comment({ comment }) {
     <div>
       <p>
         {comment.text}
-        <b>by {comment.author}</b>
+        <b>by {comment.user}</b>
       </p>
     </div>
   );
 }
+
+export default Comment;
