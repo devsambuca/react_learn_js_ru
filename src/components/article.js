@@ -1,39 +1,32 @@
 import React, { Component } from "react";
 import CommentList from "./commentList";
+import PropTypes from "prop-types";
 import toggleOpen from "../decorators/toggleOpen";
 
 class Article extends Component {
   static propTypes = {
-    article: PropTypes.shane({
-      id: PropTypes,
+    article: PropTypes.shape({
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       text: PropTypes.string
     }).isRequired
   };
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false
-    };
-  }
 
   render() {
-    const { article } = this.props;
-    const { isOpen } = this.state;
+    const { article, isOpen, toggleOpen } = this.props;
 
     return (
       <div>
         <h3>{article.title}</h3>
-        <button onClick={this.toggleOpen}>{isOpen ? "close" : "open"}</button>
+        <button onClick={toggleOpen}>{isOpen ? "close" : "open"}</button>
         {this.getBody()}
       </div>
     );
   }
 
   getBody() {
-    if (!this.state.isOpen) return null;
     const { article, isOpen } = this.props;
+    if (!isOpen) return null;
 
     return (
       <section>
@@ -42,24 +35,6 @@ class Article extends Component {
       </section>
     );
   }
-
-  toggleOpen = ev => {
-    ev.preventDefault();
-    console.log("----", ev.nativeEvent);
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
 }
 
 export default toggleOpen(Article);
-// export default function Article(props) {
-//   const { article } = props;
-
-//   return (
-//     <div>
-//       <h3>{article.title}</h3>
-//       <section>{article.text}</section>
-//     </div>
-//   );
-// }
