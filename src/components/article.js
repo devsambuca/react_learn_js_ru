@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-
 import CommentList from "./commentList";
-export default class Article extends Component {
+import toggleOpen from "../decorators/toggleOpen";
+
+class Article extends Component {
+  static propTypes = {
+    article: PropTypes.shane({
+      id: PropTypes,
+      title: PropTypes.string.isRequired,
+      text: PropTypes.string
+    }).isRequired
+  };
   constructor(props) {
     super(props);
 
@@ -43,6 +51,8 @@ export default class Article extends Component {
     });
   };
 }
+
+export default toggleOpen(Article);
 // export default function Article(props) {
 //   const { article } = props;
 
