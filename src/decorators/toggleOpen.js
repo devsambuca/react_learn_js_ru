@@ -12,15 +12,19 @@ export default OriginalComponent =>
           {...this.props}
           {...this.state}
           toggleOpen={this.toggleOpen}
+          ref={this.getRef}
         />
       );
     }
 
     toggleOpen = ev => {
-      ev.preventDefault();
-      console.log("----", ev.nativeEvent);
+      ev && ev.preventDefault && ev.preventDefault();
       this.setState({
         isOpen: !this.state.isOpen
       });
+    };
+
+    getRef = ref => {
+      console.log("---", ref);
     };
   };
